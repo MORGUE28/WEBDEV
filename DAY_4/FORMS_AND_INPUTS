@@ -1,0 +1,15 @@
+Learning about forms and inputs : Day 4
+
+Note:
+Only one label can have autofocus 
+placeholder can be used to display sample text
+required attr: compulsary inputs
+passowrd type input doesnot support autocomplete
+
+optgroup attr in select can be used to group different options 
+multiple size attr to show several no of options at a time
+
+fieldset tag : to group labels 
+
+task 1 was about divs
+task 2 was about meta 
