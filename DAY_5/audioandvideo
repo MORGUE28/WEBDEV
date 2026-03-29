@@ -1,0 +1,21 @@
+audio tag 
+attrs:
+src : source of audio
+control : to display the audio player
+loop :  to loop the audio
+muted : audio default volume will be muted
+type: audio file type
+to display an image while audio/video is downloading. use poster attr
+
+video tag attrs
+src
+control
+loop
+muted
+autoplay
+width   
+
+
+one more method to declare is 
+<audio><source src=""></audio>
+similar for video
