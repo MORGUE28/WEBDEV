@@ -1,0 +1,10 @@
+svg element
+iframe - embedding yt videos 
+iframe attr: height, width, src, title, allow="accelerometer autoplay clipboard-write encrypted-media gyroscope web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen      etc etc 
+
+working with links:
+
+
+BASIC HTML with quiz done fcc 
