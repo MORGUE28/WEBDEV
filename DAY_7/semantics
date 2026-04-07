@@ -1,0 +1,75 @@
+semantic vs presentational structure
+i tag - to diff
+em tag - to emph
+strong tag - to communicate sense of urgency
+b - bold but no urgency
+
+block vs inline 
+
+block eg:
+<blockquote cite="https://www.freecodecamp.org/news/learn-to-code-book/">
+  "Can you imagine what it would be like to be a successful developer? To have built software systems that people rely upon?"
+</blockquote>
+
+inline quoteL
+<p>
+  As Quincy Larson said,
+  <q cite="https://www.freecodecamp.org/news/learn-to-code-book/">
+    Momentum is everything.
+  </q>
+</p>
+
+abbrevating 
+<p><abbr title="HyperText Markup Language">HTML</abbr> is the foundation of the web.</p>
+
+specifying address:
+<address>
+  <h2>Company Name</h2>
+  <p>
+    1234 Elm Street<br />
+    Springfield, IL 62701<br />
+    United States
+  </p>
+  <p>Phone: <a href="tel:+15555555555">+1 (555) 555-5555</a></p>
+  <p>Email: <a href="mailto:contact@company.com">contact@company.com</a></p>
+</address>
+
+for date time:
+<p>
+  The graduation will be on <time datetime="2024-06-15T15:00">June 15</time>
+</p>
+
+
+
+mathematical semantics:
+
+<p>2<sup>2</sup> (2 squared) is 4.</p> #superscript
+
+<p>2<sub>2</sub> (2 subscript) is 22.</p> #subscript
+
+displaying computer code:
+
+  <code>color: blue;</code>
+
+  or 
+
+
+  <pre>
+  <code>
+    body {
+      color: red;
+    }
+  </code>
+</pre>
+
+
+to underline or markup text :
+ <u>inccccort</u> <u>spling</u> <u>issses</u>.
+
+ to strikethrough:
+ <s>Tomorrow's hike will be meeting at noon.</s>
+
+
+ to add other characters using ruby:
+ <ruby> 明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp> </ruby>
+ 
