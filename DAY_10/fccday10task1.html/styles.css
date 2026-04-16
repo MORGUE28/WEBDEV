@@ -1,0 +1,118 @@
+body {
+  background-image: url(https://cdn.freecodecamp.org/curriculum/css-cafe/beans.jpg);
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+.established {
+  font-style: italic;
+}
+
+h1, h2, p {
+  text-align: center;
+}
+
+.menu {
+  width: 80%; /* added width property to set the width of the menu container */
+  background-color: burlywood;
+  margin-left: auto; /* added margin properties to center the menu container horizontally */
+  margin-right: auto;
+  padding: 20px;
+  max-width: 500px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:-25px;  /* added negative margin to adjust the image position vertically upwards*/
+}
+
+hr {
+  height: 2px;
+  background-color: brown;
+  border-color: brown;
+}
+
+.bottom-line {
+  margin-top: 25px;
+}
+
+h1, h2 {
+  font-family: Impact, serif; /* added a fallback font in case Impact is not available */
+}
+
+.item p {
+  display: inline-block; /* added display property to make the flavor and price appear on the same line */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.flavor, .dessert {
+  text-align: left;
+  width: 75%;
+}
+
+.price {
+  text-align: right;
+  width: 25%;
+}
+
+/* FOOTER */
+
+footer {
+  font-size: 14px;
+}
+
+address {
+  font-style: normal; /* added font-style property to style the address text in the footer by default font-syle for address is italic */
+}
+
+.address {
+  margin-bottom: 5px;
+}
+
+a {
+  color: black; /* added color property to style the links in the footer */
+}
+
+a:visited {
+  color: black; /* added color property to style the visited links in the footer */
+}
+
+a:hover {
+  color: brown; /* added color property to style the links when hovered over in the footer */
+}
+
+a:active {
+  color: brown; /* added color property to style the links when active in the footer */
+}
+
+
+/* . : used for class selectors */
+/* # : used for id selectors */
+/* element selector : used to select all the elements of a specific type */
+/* display: inline-block; : used to make the elements appear on the same line and also allows to set width and height properties */
+/* margin: auto; : used to center the element horizontally */
+/* max-width: 500px; : used to set the maximum width of the menu container to prevent it from becoming too wide on larger screens */
+/* text-align: center; : used to center the text inside the elements */
+/* font-family: Impact, serif; : used to set the font family for the headings with a fallback font in case Impact is not available */
+/* font-style: italic; : used to make the text italic */
+/* background-image: url(); : used to set the background image for the body of the page */
+/* background-color: burlywood; : used to set the background color for the menu container */
+/* padding: 20px; : used to add padding inside the menu container */
+/* height: 2px; : used to set the height of the horizontal rule */
+/* background-color: brown; : used to set the background color of the horizontal rule */
+/* border-color: brown; : used to set the border color of the horizontal rule to match the background color */
+/* .flavor, .dessert : used to select both the flavor and dessert classes to set their width and text alignment properties */
