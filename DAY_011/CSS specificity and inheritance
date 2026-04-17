@@ -1,0 +1,81 @@
+Specificity values are calculated as a four-part value (a, b, c, d):
+
+a: Inline styles (1 or 0).
+b: Number of ID selectors.
+c: Number of class selectors, attribute selectors, and pseudo-classes.
+d: Number of type selectors, pseudo-elements, and universal selectors.
+Each part of the specificity value carries different weight:
+
+Inline styles (a) have the highest weight, contributing a value of 1 to the first part of the specificity value.
+
+ID selectors (b) carry the next highest weight, with each ID contributing 1 to the second part of the specificity value.
+
+Class selectors, attribute selectors, and pseudo-classes (c) carry moderate weight, with each contributing 1 to the third part of the specificity value.
+
+Type selectors and pseudo-elements (d) have the lowest weight, with each contributing 1 to the fourth part of the specificity value.
+
+Universal selector (*): The universal selector contributes 0 to the specificity calculation and does not affect specificity. Its inclusion in a selector does not change the specificity value.
+
+Inline CSS has the highest specificity because it is applied directly to the element. It overrides any internal or external CSS. The specificity value for inline styles is (1, 0, 0, 0).
+
+Internal CSS is defined within a style element in the head section of the HTML document. It has lower specificity than inline styles. Both internal and external CSS share the same specificity level — the specificity is determined by the selectors used, not by where the CSS is defined. When two rules share equal specificity, the one that appears later in the document wins. So if an external stylesheet is linked after an internal style block, the external rules take precedence. If it's linked before, the internal rules win.
+
+The specificity value for internal styles is determined by the selectors used. For example, an ID selector within internal CSS has a specificity value of (0, 1, 0, 0).
+
+External CSS is linked via a link element in the head section and is written in separate .css files. Like internal CSS, the specificity of external styles is determined by the selectors used. External CSS provides the best maintainability for larger projects.
+
+The specificity value for external styles is also determined by the selectors used. For example, a class selector within external CSS has a specificity value of (0, 0, 1, 0).
+
+The universal selector(*) has the lowest specificity value of any selector. It contributes 0 to all parts of the specificity value (0, 0, 0, 0).
+
+Type selectors, also known as element selectors, target elements based on their tag name.Type selectors have a relatively low specificity compared to other selectors. The specificity value for a type selector is (0, 0, 0, 1).
+
+Class selectors have a higher specificity than type selectors but lower than ID selectors and inline styles.
+
+The specificity value for a class selector is (0, 0, 1, 0). This means that class selectors can override type selectors, but they can be overridden by ID selectors and inline styles.
+
+ID selectors have a very high specificity, higher than type selectors and class selectors, but lower than inline styles. The specificity value for an ID selector is (0, 1, 0, 0).
+
+This means that ID selectors can override class selectors and type selectors but can be overridden by inline styles.
+
+
+The !important keyword in CSS is used to give a style rule the highest priority, allowing it to override any other declarations for a property.
+
+When used, it forces the browser to apply the specified style, regardless of the specificity of other selectors.
+The !important keyword is used after the CSS value and before the semicolon.
+
+Now the paragraph element will have those black and white colors applied because the inline styles are being overridden with the use of the !important keyword.
+
+The !important keyword in CSS is used to give a style rule the highest priority, effectively overriding other declarations, including those with higher specificity and inline styles.
+
+However, the !important keyword does not change the specificity of the CSS selector itself. It simply ensures that the rule with !important is applied, even if there are other conflicting rules with higher specificity.
+
+Another appropriate use case for the !important keyword is to override styles from third-party libraries or frameworks when you do not have control over the original CSS.
+
+However, overusing the !important keyword can lead to difficulties in maintaining and debugging your CSS, as it breaks the natural cascading of styles and can lead to unintended consequences.
+
+So, it is best to use the !important keyword sparingly.
+
+
+Working With the width and height Properties
+width Property: This property specifies the width of an element. If you do not specify a width, then the default is set to auto. This lets the browser determine the element's width based on its content, parent, and display type.
+min-width Property: This property specifies the minimum width for an element.
+max-width Property: This property specifies the maximum width for an element.
+height Property: This property specifies the height of an element. Similarly, the height is auto by default, which means it will adjust to the content inside.
+min-height Property: This property specifies the minimum height for an element.
+max-height Property: This property specifies the maximum height for an element.
+Different Types of CSS Combinators
+Descendant Combinator: This combinator is used to target elements that are descendants of a specified parent element. The following example will target all li items inside ul elements.
+Child Combinator (>): This combinator is used to select elements that are direct children of a specified parent element. The following example will target all p elements that are direct children of the container class.
+Next-sibling Combinator (+): This combinator selects an element that immediately follows a specified sibling element. The following example will select the paragraph element that immediately follows the h2 element.
+Subsequent-sibling Combinator (~): This combinator selects all siblings of a specified element that come after it. The following example will style only the second paragraph element because it is the only one that is a sibling of the ul element and shares the same parent.
+
+Inline, Block, and Inline-Block Level Elements
+Inline Level Elements: Inline elements only take up as much width as they need and do not start on a new line. These elements flow within the content, allowing text and other inline elements to appear alongside them. Common inline elements are span, anchor, and img elements.
+Block Level Elements: Block-level elements start on a new line and take up the full width available to them by default, stretching across the width of their container. Some common block-level elements are div, paragraph, and section elements.
+Inline-Block Level Elements: You can set an element to inline-block by using the display property. These elements behave like inline elements but can have a width and height set like block-level elements.
+Margin and Padding
+margin Property: This property is used to apply space outside the element, between the element's border and the surrounding elements.
+padding Property: This property is used to apply space inside the element, between the content and its border.
+margin Shorthand: You can specify 1–4 values to set the margin sides. One value applies to all four sides; two values set top and bottom, then right and left; three values set top, horizontal (right and left), then bottom; four values set top, right, bottom, left.
+padding Shorthand: You can specify 1–4 values to set the padding sides. One value applies to all four sides; two values set top and bottom, then right and left; three values set top, horizontal (right and left), then bottom; four values set top, right, bottom, left.
