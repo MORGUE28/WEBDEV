@@ -1,0 +1,28 @@
+body {
+background-color:#f4f4f4;
+}
+
+.color-box {
+  width: 80px;
+  height: 80px;
+}
+
+.color1 {
+  background-color: #c2b2b4;
+}
+
+.color2 {
+  background-color: rgb(107, 78, 113);
+}
+
+.color3 {
+  background-color: navy;
+}
+
+.color4 {
+  background-color: hsl(211, 21%, 41%);
+}
+
+.color5 {
+  background: linear-gradient(45deg,#c2b2b4,rgb(107, 78, 113),hsl(211, 21%, 41%))
+}

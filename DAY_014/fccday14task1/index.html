@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Job Application Form</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Application Form</h1>
+        <form>
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="name">Full Name: </label>
+                <input type="text" name="name" id="name" required>
+                <hr>
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" required>
+            </fieldset>
+            <fieldset>
+                <legend>Job To Apply</legend>
+                <label for="position">Position: </label>
+                <select id="position">
+                    <option value="engineer">Engineer</option>
+                    <option value="designer">Designer</option>
+                    <option value="analyst">Analyst</option>
+                    <option value="itstaff">IT Staff</option>
+                </select>
+                <hr>
+                <fieldset class="radio-group">
+                    <legend>Availability</legend>
+                    <input type="radio" name="availability" value="full-time" id="full-time" Selected>
+                    <label for="full-time">Full Time</label>
+                    <input type="radio" name="availability" value="part-time" id="part-time">
+                    <label for="part-time">Part Time</label>
+                    <input type="radio" name="availability" value="intern" id="intern">
+                    <label for="intern">Internship</label>
+                </fieldset>
+            </fieldset>
+            <fieldset>
+                <legend>Upload your Cover letter</legend>
+                <label for="message">type-in your cover letter:</label>
+                <textarea id="message"></textarea>
+            </fieldset>
+            <button type="submit">Submit your Application</button>
+        </form>
+    </div>
+</body>
+</html>
