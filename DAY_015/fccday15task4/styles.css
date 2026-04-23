@@ -1,0 +1,48 @@
+body {
+  text-align: center;
+  font-family: Calibri, sans-serif;
+  color:#20063b;
+  background-color: #9ad1d4;
+}
+
+.feature-card-container {  background-color: #20063b;
+border-radius: 20px;
+max-width: 50vw;
+display: block;
+margin: 0 auto;
+}
+.feature-card {
+  display: block;
+  padding: 10px;
+  font-size: 1.2em;
+  margin: 10px auto;
+  cursor: pointer;
+  color: #9ad1d4;
+  
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #cc3363;
+  border: 3px solid #62c370;
+  border-radius: 3px;
+  transition: all 0.3s;
+  margin-right: 20px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #c2f9bb;
+  border-color:#9ad1d4;  
+}
+
+input[type="checkbox"]:checked::after {
+  content:'✓';
+  color: #20063b;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}

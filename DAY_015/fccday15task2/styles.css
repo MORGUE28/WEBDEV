@@ -1,0 +1,40 @@
+body {
+    background-color: midnightblue;
+    color: gold;
+    font-family: Arial, sans-serif;
+}
+
+label {
+    margin: 10px auto;
+    color: goldenrod;
+    display: block;
+}
+
+input, textarea {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+form {
+    vertical-align: middle;
+}
+
+button {
+    font-size: 1.2em;
+    background-color: midnightblue;
+    color: goldenrod;
+}
+
+button:hover {
+    background-color: gold;
+    color: midnightblue;
+    cursor: pointer;
+}
+
+.form-container {
+    background-color: navy;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+}
