@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Dev Journey - Learning Log</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .day-card { transition: all 0.3s ease; }
+        .day-card:hover { transform: translateY(-4px); }
+        .modal-active { overflow: hidden; }
+        .modal-hidden { display: none; }
+        .modal-flex { display: flex; }
+        .sync-loading { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .link-list::-webkit-scrollbar { width: 4px; }
+        .link-list::-webkit-scrollbar-track { background: transparent; }
+        .link-list::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Hero Section -->
+    <header class="bg-indigo-700 text-white py-16 px-6 shadow-xl">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold tracking-wider uppercase mb-4">
+                        <i class="fas fa-microchip mr-2"></i>Hybrid Auto-Sync
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                        My Coding Journey
+                    </h1>
+                    <p class="text-indigo-100 text-lg max-w-2xl">
+                        A dynamic dashboard for <span class="font-mono bg-indigo-800 px-2 py-0.5 rounded text-sm text-white">MORGUE28/WEBDEV</span>. 
+                        Detects all your folders and sub-tasks automatically.
+                    </p>
+                </div>
+                <div class="flex flex-col items-center gap-4">
+                    <div class="flex gap-4">
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center min-w-[100px]">
+                            <span id="dayCount" class="block text-3xl font-bold">0</span>
+                            <span class="text-[10px] uppercase tracking-widest text-indigo-200">Days Found</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full justify-center">
+                        <button onclick="syncWithGitHub()" class="flex-1 min-w-[140px] bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:bg-indigo-500 transition-colors flex items-center justify-center gap-2 border border-indigo-400">
+                            <i id="syncIcon" class="fas fa-sync-alt"></i>
+                            GitHub Sync
+                        </button>
+                        <button onclick="document.getElementById('directoryPicker').click()" class="flex-1 min-w-[140px] bg-white text-indigo-700 font-bold py-3 px-4 rounded-xl shadow-lg hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2">
+                            <i class="fas fa-folder-open"></i>
+                            Scan Local Folder
+                        </button>
+                        <input type="file" id="directoryPicker" webkitdirectory directory multiple class="hidden" onchange="handleLocalDirectorySelect(event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto py-12 px-6">
+        
+        <!-- Grid Container -->
+        <div id="taskGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Loading placeholder -->
+            <div id="initialLoader" class="col-span-full flex flex-col items-center py-20">
+                <div class="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+                <div class="text-slate-400 font-medium text-center">
+                    Awaiting Sync...<br>
+                    <span class="text-xs">Hosted? Use GitHub Sync. Local? Use Scan Folder.</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="statusMessage" class="mt-8 text-center text-slate-500 text-sm font-medium hidden"></div>
+
+        <div class="mt-16 p-8 bg-indigo-50 rounded-3xl border border-indigo-100 text-center">
+            <h4 class="font-bold text-indigo-900 mb-2">Automatic Task Detection</h4>
+            <p class="text-indigo-700 text-sm">
+                <strong>GitHub:</strong> Live updates from your repo.<br>
+                <strong>Local:</strong> Click "Scan Local Folder" and select your <code>WEBDEV</code> folder. 
+                It will automatically find all <code>DAY_XXX</code> folders and their sub-tasks.
+            </p>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-slate-400 text-sm border-t border-slate-200 bg-white">
+        <p>&copy; 2024 MORGUE28 • Web Dev Learning Portfolio</p>
+    </footer>
+
+    <script>
+        const GITHUB_USERNAME = 'MORGUE28'; 
+        const GITHUB_REPO = 'WEBDEV';    
+
+        let activeDays = [];
+        const grid = document.getElementById('taskGrid');
+        const dayCountDisplay = document.getElementById('dayCount');
+        const syncIcon = document.getElementById('syncIcon');
+        const status = document.getElementById('statusMessage');
+
+        function renderCards() {
+            if (activeDays.length === 0) return;
+            
+            grid.innerHTML = '';
+            // Sort by day number descending
+            activeDays.sort((a, b) => b.num - a.num);
+            
+            activeDays.forEach(day => {
+                const card = document.createElement('article');
+                card.className = 'day-card bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col';
+                
+                const linksHtml = day.files.length > 0 
+                    ? day.files.map(file => {
+                        const isSubfolder = file.includes('/');
+                        const displayName = isSubfolder ? file.split('/')[0] : file;
+                        return `
+                        <a href="./${day.path}/${file}" target="_blank" class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl hover:bg-indigo-50 hover:text-indigo-700 transition-colors group/link border border-transparent hover:border-indigo-100">
+                            <span class="text-xs font-medium truncate pr-2">
+                                <i class="fas ${isSubfolder ? 'fa-folder-open' : 'fa-file-code'} mr-2 text-slate-400 group-hover/link:text-indigo-500"></i>
+                                ${displayName}
+                            </span>
+                            <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover/link:opacity-100 transition-opacity"></i>
+                        </a>
+                    `}).join('')
+                    : `<div class="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">No files detected.</div>`;
+
+                card.innerHTML = `
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="w-10 h-10 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center font-bold">${day.num}</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded font-bold uppercase tracking-widest">Live</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-1 text-slate-800">Day ${day.num} Work</h3>
+                        <p class="text-slate-500 text-xs mb-4">Automatically detected from structure.</p>
+                        <div class="space-y-1.5 max-h-[200px] overflow-y-auto link-list pr-1">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Tasks (${day.files.length})</p>
+                            ${linksHtml}
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-slate-50 text-[10px] font-mono text-slate-400 border-t border-slate-100 uppercase">PATH: ${day.path}/</div>
+                `;
+                grid.appendChild(card);
+            });
+            dayCountDisplay.innerText = activeDays.length;
+        }
+
+        async function syncWithGitHub() {
+            syncIcon.classList.add('sync-loading');
+            status.innerText = "Syncing with GitHub API...";
+            status.classList.remove('hidden');
+
+            try {
+                const timestamp = Date.now();
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/?t=${timestamp}`);
+                if (!response.ok) throw new Error('GitHub Sync Failed. Check your connection.');
+                
+                const data = await response.json();
+                const folders = data.filter(item => item.type === 'dir' && item.name.toUpperCase().startsWith('DAY_'));
+                
+                activeDays = []; 
+                
+                const folderPromises = folders.map(async (folder) => {
+                    const dayNumMatch = folder.name.match(/\d+/);
+                    const dayNum = dayNumMatch ? parseInt(dayNumMatch[0], 10) : 0;
+                    
+                    try {
+                        const fileResponse = await fetch(`${folder.url}${folder.url.includes('?') ? '&' : '?'}t=${timestamp}`);
+                        const itemsData = await fileResponse.json();
+                        
+                        const tasks = itemsData
+                            .filter(item => !item.name.startsWith('.')) 
+                            .map(item => {
+                                if (item.type === 'dir') return item.name + '/index.html';
+                                return item.name;
+                            });
+
+                        activeDays.push({ num: dayNum, path: folder.name, files: tasks });
+                    } catch (e) { console.error(e); }
+                });
+
+                await Promise.all(folderPromises);
+                renderCards();
+                status.innerText = `GitHub Sync Successful! Detected ${activeDays.length} days.`;
+            } catch (err) {
+                status.innerText = "GitHub Sync Failed: " + err.message;
+            } finally {
+                syncIcon.classList.remove('sync-loading');
+            }
+        }
+
+        // --- NEW: Automatic Local Directory Detection ---
+        function handleLocalDirectorySelect(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+
+            status.innerText = "Parsing local folder structure...";
+            status.classList.remove('hidden');
+
+            const dayMap = {};
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                // Relative path looks like: WEBDEV/DAY_010/fccday10task1/index.html
+                const pathParts = file.webkitRelativePath.split('/');
+                
+                // Find where DAY_XXX is in the path
+                const dayIndex = pathParts.findIndex(part => part.toUpperCase().startsWith('DAY_'));
+                
+                if (dayIndex !== -1) {
+                    const dayFolder = pathParts[dayIndex];
+                    const dayNumMatch = dayFolder.match(/\d+/);
+                    const dayNum = dayNumMatch ? parseInt(dayNumMatch[0], 10) : 0;
+
+                    if (!dayMap[dayFolder]) {
+                        dayMap[dayFolder] = { num: dayNum, path: dayFolder, files: new Set() };
+                    }
+
+                    // Look at everything after the DAY_XXX folder
+                    const subPath = pathParts.slice(dayIndex + 1);
+                    if (subPath.length > 0) {
+                        const fileName = subPath[0];
+                        // If it's a sub-directory containing an index.html
+                        if (subPath.length > 1 && subPath[subPath.length - 1].toLowerCase() === 'index.html') {
+                            dayMap[dayFolder].files.add(`${subPath[0]}/index.html`);
+                        } 
+                        // Otherwise it's a direct file in the DAY folder
+                        else if (subPath.length === 1 && !fileName.startsWith('.') && !fileName.includes('WPLOCAL')) {
+                            dayMap[dayFolder].files.add(fileName);
+                        }
+                    }
+                }
+            }
+
+            activeDays = Object.values(dayMap).map(day => ({
+                ...day,
+                files: Array.from(day.files)
+            }));
+
+            renderCards();
+            status.innerText = `Local Scan Successful! Automatically found ${activeDays.length} days.`;
+        }
+
+        // Try to auto-sync with GitHub on load (useful for the live site)
+        window.onload = () => {
+            // Only auto-sync if we aren't likely running on a strictly local file:// protocol
+            if (window.location.protocol !== 'file:') {
+                syncWithGitHub();
+            } else {
+                status.innerText = "Ready for Local Scan.";
+                status.classList.remove('hidden');
+                document.getElementById('initialLoader').innerHTML = `
+                    <div class="col-span-full text-center py-20">
+                        <i class="fas fa-laptop-code text-4xl text-slate-200 mb-4"></i>
+                        <div class="text-slate-400">Click "Scan Local Folder" to begin.</div>
+                    </div>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>
