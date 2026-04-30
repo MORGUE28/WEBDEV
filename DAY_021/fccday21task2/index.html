@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Documentation Page</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <body>
+    <nav id="navbar">
+      <header>Stripe API</header>
+      <ul>
+        <li><a class="nav-link" href="#API_Reference">API Reference</a></li>
+        <li><a class="nav-link" href="#Authentication">Authentication</a></li>
+        <li><a class="nav-link" href="#Expanding_Responses">Expanding Responses</a></li>
+        <li><a class="nav-link" href="#Idempotent_requests">Idempotent requests</a></li>
+        <li><a class="nav-link" href="#Connected_Accounts">Connected Accounts</a></li>
+      </ul>
+    </nav>
+
+    <main id="main-doc">
+      <section class="main-section" id="API_Reference">
+        <header>API Reference</header>
+        <p>Use Stripe’s no-code options or apps from our partners to get started with Stripe.</p>
+        <p>The base URL for the API is <code>https://api.stripe.com</code>.</p>
+        <ul>
+          <li>Documentation is updated frequently.</li>
+        </ul>
+      </section>
+
+      <section class="main-section" id="Authentication">
+        <header>Authentication</header>
+        <p>The Stripe API uses API keys to authenticate requests.</p>
+        <p>Test secret keys have the prefix <code>sk_test_</code>.</p>
+        <pre><code>curl https://api.stripe.com/v1/charges -u sk_test_key:</code></pre>
+        <ul>
+          <li>Keep your keys secret.</li>
+        </ul>
+      </section>
+
+      <section class="main-section" id="Expanding_Responses">
+        <header>Expanding Responses</header>
+        <p>Many objects allow you to expand nested objects.</p>
+        <p>This reduces the number of API calls needed.</p>
+        <pre><code>stripe charges retrieve --expand=customer</code></pre>
+        <ul>
+          <li>Expansion is depth-limited.</li>
+        </ul>
+      </section>
+
+      <section class="main-section" id="Idempotent_requests">
+        <header>Idempotent requests</header>
+        <p>The API supports idempotency for safely retrying requests.</p>
+        <p>Use an <code>idempotency-key</code> header to prevent duplicates.</p>
+        <pre><code>--idempotency=TvqqU7glUbURMzQT</code></pre>
+        <ul>
+          <li>Keys expire after 24 hours.</li>
+        </ul>
+      </section>
+
+      <section class="main-section" id="Connected_Accounts">
+        <header>Connected Accounts</header>
+        <p>You can issue requests on behalf of your connected accounts.</p>
+        <p>Include a <code>Stripe-Account</code> header containing the account ID.</p>
+        <pre><code>--stripe-account acct_1032D82eZvKYlo2C</code></pre>
+        <ul>
+          <li>Standard accounts are supported.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
