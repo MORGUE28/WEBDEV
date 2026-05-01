@@ -1,0 +1,242 @@
+What Are CSS Custom Properties, and How Do They Work?
+    CSS custom properties, also known as CSS variables, are entities defined by CSS authors that contain specific values to be reused throughout a document. They are a powerful feature that allows for more efficient, maintainable, and flexible stylesheets.
+
+    The syntax for declaring a custom property is straightforward. It begins with two dashes (--) followed by the property name:
+
+        :root {
+        --main-color: #3498db;
+        }
+
+
+    In this example, we're declaring a custom property named --main-color with a value of #3498db. The :root pseudo-class is commonly used to declare global custom properties, as it represents the highest-level parent in the DOM tree.
+
+    To use a custom property, you employ the var() function:
+
+        :root {
+            --main-color: #3498db;
+        }
+
+        .button {
+            background-color: var(--main-color);
+        }
+
+    This sets the background color of elements with the class button to the value stored in --main-color.
+
+    One of the key features of custom properties is that they follow the CSS cascade. This means that you can redefine them for specific elements or contexts:
+
+        .alert {
+            --main-color: #e74c3c;
+            background-color: var(--main-color);
+        }
+
+    In this case, elements with the class alert will use a different --main-color value, overriding the global definition.
+
+    Custom properties also support fallback values. If a custom property is not defined or is invalid, you can provide a fallback value:
+
+        :root {
+            --text-color: green;
+        }
+
+        .text {
+            color: var(--text-color, green);
+        }
+
+    Here, if --text-color is not defined, the color will default to green.
+
+    Custom properties are particularly useful in creating themeable designs. You can define a set of properties for different themes:
+
+        :root {
+            --bg-color: black;
+        }
+
+        body {
+            background-color: var(--bg-color);
+        }
+
+        .light-theme {
+            --bg-color: white;
+            --text-color: black;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 10px;
+        }
+
+    Switching themes becomes as simple as adding or removing a class from the body element.
+
+    Custom properties can also be used with media queries to create responsive designs:
+
+        :root {
+            --card-width: 90%;
+            --card-bg: #f0f0f0;
+            --card-padding: 1rem;
+            --text-color: #333;
+        }
+
+        /* Tablet screens and up */
+        @media (min-width: 600px) {
+        :root {
+            --card-width: 70%;
+            --card-bg: #e8f5e9;
+            --card-padding: 1.5rem;
+        }
+        }
+
+        /* Desktop screens and up */
+        @media (min-width: 1024px) {
+        :root {
+            --card-width: 50%;
+            --card-bg: #d0f0ff;
+            --card-padding: 2rem;
+        }
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fafafa;
+        }
+
+        .card {
+            width: var(--card-width);
+            background-color: var(--card-bg);
+            padding: var(--card-padding);
+            color: var(--text-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+    This approach allows for more maintainable responsive layouts, as you can change values in one place rather than throughout your stylesheet. This can significantly reduce repetition in your stylesheets, especially for frequently used, complex values.
+
+    Custom properties can also reference other custom properties:
+
+        :root {
+            --primary-color: #3498db;
+            --button-bg: var(--primary-color);
+        }
+
+        button {
+            background-color: var(--button-bg);
+        }
+
+    This allows for creating relationships between different style aspects, making it easier to maintain consistent themes across your site.
+
+    While custom properties offer many advantages, it's important to be aware of their browser support. They are well-supported in modern browsers, but older browsers may not recognize them. Always have a fallback plan when using cutting-edge features.
+
+    In conclusion, CSS custom properties provide a powerful way to create more dynamic, flexible, and maintainable stylesheets. They allow for the creation of themeable designs, simplify responsive layouts, and enable runtime manipulation of styles.
+
+    As web development continues to evolve, custom properties are becoming an increasingly important tool in a developer's toolkit, offering new possibilities for creating adaptable and efficient CSS.
+
+
+
+What Is the @property Rule, and How Does It Work with Fallbacks?
+    The @property rule is a powerful CSS feature that allows developers to define custom properties with greater control over their behavior, including how they animate and their initial values.
+
+    This rule provides a way to enhance the functionality of CSS custom properties and offers more flexibility in their application.
+
+    The basic syntax of the @property rule is as follows:
+
+        @property --property-name {
+        syntax: '<type>';
+        inherits: true | false;
+        initial-value: <value>;
+        }
+
+    The --property-name is the name of the custom property you're defining. Like all custom properties, it must start with two dashes.
+
+    syntax defines the type of the property, which can be things like <color>, <length>, <number>, <percentage>, or more complex types.
+
+    inherits specifies whether the property should inherit its value from its parent element.
+
+    initial-value sets the default value of the property.
+
+    Here's a practical example of using the @property rule:
+
+        @property --main-color {
+            syntax: '<color>';
+            inherits: false;
+            initial-value: #3498db;
+        }
+
+        .button {
+            background-color: var(--main-color);
+        }
+
+    In this example, we're defining a custom property --main-color as a color value, setting it to not inherit, and giving it an initial value of #3498db.
+
+    One of the key benefits of the @property rule is that it allows for animation of custom properties, which wasn't possible before:
+
+        @property --gradient-angle {
+            syntax: '<angle>';
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        .gradient-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(var(--gradient-angle), red, blue);
+            transition: --gradient-angle 0.5s;
+        }
+
+        .gradient-box:hover {
+            --gradient-angle: 90deg;
+        }
+
+    The code above creates a gradient that smoothly animates when the element is hovered over, something that wasn't achievable with standard custom properties.
+
+    Now, let's discuss how the @property rule works with fallbacks.
+
+    Fallbacks are crucial in CSS to ensure that styles degrade gracefully in browsers that don't support certain features. With the @property, fallbacks work on two levels: for the rule itself and for the use of the custom property.
+
+    For browsers that don't support the @property rule, you can provide a fallback by declaring the custom property in the traditional way:
+
+        :root {
+            --main-color: #3498db;
+        }
+
+        @property --main-color {
+            syntax: '<color>';
+            inherits: false;
+            initial-value: #3498db;
+        }s
+
+        body {
+            background-color: var(--main-color);
+        }
+
+    In this case, browsers that support @property will use the more strictly defined version, while others will fall back to the standard custom property declaration.
+
+    When using the custom property, you can provide a fallback value using the var() function, just as you would with standard custom properties:
+
+        .button {
+            background-color: var(--main-color, #3498db);
+        }
+
+    This ensures that even if the --main-color property is not defined or is invalid, the button will still have a background color.
+
+    The @property rule also allows for more complex fallback scenarios. For instance, you can use it to provide type-safe fallbacks:
+
+        @property --padding {
+            syntax: '<length>';
+            inherits: false;
+            initial-value: 10px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: darkred;
+            color: white;
+            padding: var(--padding);
+        }
+
+    In this case, if someone tries to set --padding to an invalid value, like a color, the browser will fall back to the initial value of 10px, maintaining type safety.
+
+    The CSS @property rule is considered widely available across all major modern browser engines (like Chrome, Edge, Opera, Firefox, and Safari) since early-2024. If you want to support earlier browsers you need to provide fallback CSS as explained above.
+
+    In conclusion, the @property rule represents a significant advancement in how we work with custom properties in CSS. It provides more control and enables new possibilities like animation of custom properties. However, it's important to use it judiciously and always provide appropriate fallbacks to ensure a good experience across all browsers. As with any cutting-edge web technology, the key is to enhance the experience for browsers that support it while ensuring basic functionality for those that don't.
