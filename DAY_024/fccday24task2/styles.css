@@ -1,0 +1,74 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.newspaper-layout {
+  display: grid;
+  /* Test 13, 14, 15, 16: Exact area mapping */
+  grid-template-areas:
+    "title title title"
+    "feature-article feature-article cover-image"
+    "secondary-article secondary-article cover-image"
+    "small-article1 small-article2 small-article3";
+  
+  /* Test 17: Three equal parts */
+  grid-template-columns: repeat(3, 1fr);
+  
+  /* Test 18: Specific row heights */
+  grid-template-rows: auto 1fr 1fr 1fr;
+  
+  gap: 20px;
+}
+
+.title {
+  font-family: 'Ewert', serif;
+  font-size: 4rem;
+  text-align: center;
+  grid-area: title; /* Test 20 */
+}
+
+article {
+  font-family: 'Almendra', sans-serif;
+  font-size: 1.6rem;
+}
+
+.feature-article {
+  grid-area: feature-article; /* Test 21 */
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Test 22: Figure element gets the grid area */
+.cover-image {
+  grid-area: cover-image;
+}
+
+/* Test 27: Image inside the figure */
+.cover-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.secondary-article {
+  grid-area: secondary-article; /* Test 23 */
+}
+
+.small-article1 {
+  grid-area: small-article1; /* Test 24 */
+}
+
+.small-article2 {
+  grid-area: small-article2; /* Test 25 */
+}
+
+.small-article3 {
+  grid-area: small-article3; /* Test 26 */
+}
