@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Landing Page | OnePlus</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-logo-container">
+            <img id="header-img" src="https://dl.svgcdn.com/png/simple-icons/oneplus-800.png" alt="product-logo" />
+            <h1 id="header-title">One<span>P</span>lus</h1>
+        </div>
+        <nav id="nav-bar">
+            <ul>
+                <li><a class="nav-link" href="#intro">Overview</a></li>
+                <li><a class="nav-link" href="#features">Features</a></li>
+                <li><a class="nav-link" href="#feature-video">Preview</a></li>
+                <li><a class="nav-link" href="#signup-form">Waitlist</a></li>
+                <li><a class="nav-link" href="#footer">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <img id="product-image" src="https://www.oneplus.in/content/dam/oasis/page/2023/global/product/tesla/module-use/module-use-waterproof-bg-1920.jpg" alt="earbuds-image">
+            <h2 id="intro-title">OnePlus Nord Buds 2</h2>
+            <p id="intro-description">Experience crystal-clear sound with the OnePlus Nord Buds 2. Featuring advanced noise cancellation and a comfortable fit, these earbuds are perfect for music lovers and professionals alike.</p>
+        </section>
+
+        <section id="features">
+            <h2 id="features-title">Key Features</h2>
+            <ul id="features-list">
+                <li class="feature-item">
+                    <h4>Advanced Noise Cancellation</h4>
+                    <p>Block out unwanted noise and immerse yourself in your music with our state-of-the-art technology.</p>
+                </li>
+                <li class="feature-item">
+                    <h4>Comfortable Fit</h4>
+                    <p>Designed for all-day comfort, these earbuds fit securely without causing irritation.</p>
+                </li>
+                <li class="feature-item">
+                    <h4>Crystal-Clear Sound</h4>
+                    <p>Enjoy pristine audio quality with advanced sound technology delivering every detail.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="feature-video">
+            <div class="video-container">
+                <iframe id="video" src="https://www.youtube.com/embed/gmXWPzqfFsA" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="signup-form">
+            <h2 id="form-title">Join the Waitlist</h2>
+            <form id="form" action="https://www.freecodecamp.org/email-submit" method="POST">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                <input type="submit" id="submit" value="Sign Up">
+            </form>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div id="footer-container">
+            <div id="footer-logo-container">
+                <img id="footer-img" src="https://dl.svgcdn.com/png/simple-icons/oneplus-800.png" alt="product-logo" />
+                <h1 id="footer-title">One<span>P</span>lus</h1>
+            </div>
+            <div id="contact-info">
+                <p><strong>Contact us:</strong></p>
+                <div class="contact-row">
+                    <span>Email:</span>
+                    <a href="mailto:info@oneplus.com">info@oneplus.com</a>
+                </div>
+                <div class="contact-row">
+                    <span>Phone:</span>
+                    <a href="tel:+1234567890">+1 (234) 567-890</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2024 OnePlus. All rights reserved.</p>
+    </footer>
+</body>
+</html>

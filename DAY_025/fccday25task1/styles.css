@@ -1,0 +1,253 @@
+/* Base Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Header & Navigation */
+#header {
+    display: flex;
+    flex-direction: column; /* Stacked for mobile */
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: #f00; /* OnePlus Red */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#header-img {
+    width: 40px;
+    height: auto;
+}
+
+#header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+#header-title {
+    font-size: 1.8rem;
+    color: white;
+    letter-spacing: 1px;
+}
+
+#header-title span {
+    color: black;
+}
+
+#nav-bar ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+/* Main Layout Sections */
+#intro, #features, #feature-video, #signup-form {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#intro {
+    padding-top: 180px; /* Offset for fixed header */
+    text-align: center;
+}
+
+#product-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+#intro-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+#intro-description {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Features Grid */
+#features-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+#features-list {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+    gap: 20px;
+    list-style: none;
+}
+
+.feature-item {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid red;
+}
+
+/* Video Section */
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+}
+
+/* Form Section */
+#signup-form {
+    text-align: center;
+    background-color: #f4f4f4;
+    margin-top: 40px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#email {
+    padding: 12px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#submit {
+    padding: 12px 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Footer */
+footer {
+    padding: 40px 5%;
+    background-color: #222;
+    color: #eee;
+}
+
+#footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+#footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#footer-img {
+    width: 40px;
+}
+
+.contact-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#contact-info a {
+    color: #ff4d4d;
+    text-decoration: none;
+}
+
+.copyright {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Desktop Responsiveness (768px and up) */
+@media (min-width: 768px) {
+    #header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 5%;
+    }
+
+    #header-logo-container {
+        margin-bottom: 0;
+    }
+
+    #nav-bar ul {
+        gap: 30px;
+    }
+
+    #intro {
+        padding-top: 120px;
+    }
+
+    #features-list {
+        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+    }
+
+    #form {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #email, #submit {
+        width: auto;
+    }
+
+    #footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
