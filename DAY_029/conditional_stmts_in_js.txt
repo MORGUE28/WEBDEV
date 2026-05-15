@@ -1,0 +1,218 @@
+What Are Conditional Statements, and How Do If/Else If/Else Statements Work?
+    Conditional statements let you make decisions in your JavaScript code. They allow your program to flow in a particular way based on certain conditions. Let's take a look at how if, else if, else, and the ternary operator work to let you control the flow of your code.
+
+    An if statement takes a condition and runs a block of code if that condition is truthy. Truthy values are any values that result in true when evaluated in a Boolean context like an if statement. Here are examples of truthy values:
+
+    non-empty strings, for example, hello
+
+    any number other than 0 and -0, for example, 4, -5, and others
+
+    arrays
+
+    objects
+
+    the boolean true
+
+    On the other hand, falsy values are values that evaluate to false in a boolean context. JavaScript has few falsy values, which makes them easy to remember. Here are a few falsy values:
+
+    boolean false
+
+    0 (zero)
+
+    "" (empty string)
+
+    null
+
+    undefined
+
+    NaN (Not a Number)
+
+    Now, that we have a basic understanding of truthy and falsy values, let's see how it works with if statements. In this first example, we are using a couple of if statements to check against truthy and falsy values:
+
+    if (null) {
+    console.log("This will not run.");
+    }
+
+    if ("freeCodeCamp") {
+    console.log("This will run.");
+    }
+    Since null is a falsy value, the message inside the block will never be logged to the console. But for the second if statement, the string freeCodeCamp is a truthy value, and will be considered true in this boolean context of the if statement. As a result, the message This will run. will be logged to the console.
+
+    Let's take a look at a few more examples on how if statements work with different comparison operators. Here is an example of using an if statement to check if the user is eligible to vote:
+
+    const age = 22;
+
+    if (age >= 18) {
+    console.log("You're eligible to vote"); // You're eligible to vote
+    }
+    In this example, since age is currently 22, this means the condition will evaluate to true because 22 is greater than or equal to 18. So the message You're eligible to vote will be logged to the console. If we change the example so age is now 15, then the condition will evaluate to false and the message will not be logged to the console:
+
+    const age = 15;
+
+    if (age >= 18) {
+    console.log("You're eligible to vote"); // Code not running because age is less than 18
+    }
+    When a condition is false, then you can use an else clause:
+
+    const age = 15;
+
+    if (age >= 18) {
+    console.log("You're eligible to vote");
+    } else {
+    console.log("You're not eligible to vote"); // You're not eligible to vote
+    }
+    In this example, 15 is not greater than or equal to 18, so the condition would be false. The code inside the else block will run in this case.
+
+    If you want to check multiple conditions, you can use an else if block. This allows your program to choose between more than two paths.
+
+    const score = 87;
+
+    if (score >= 90) {
+    console.log('You got an A'); 
+    } else if (score >= 80) {
+    console.log('You got a B'); // You got a B
+    } else if (score >= 70) {
+    console.log('You got a C');
+    } else {
+    console.log('You failed! You need to study more!');
+    }
+    Since the score is currently 87, then the message of You got a B would be logged to the console.
+
+    The ternary operator is a compact way to write simple if/else statements. It has three parts: a condition, a result if the condition is true, and a result if it is false. Here's the basic syntax:
+
+    condition ? expressionIfTrue : expressionIfFalse;
+    Here's an example dealing with weather temperatures in Celsius:
+
+    const temperature = 30;
+    const weather = temperature > 25 ? 'sunny' : 'cool';
+
+    console.log(`It's a ${weather} day!`);
+    If temperature is greater than 25, the code above logs It's a sunny day!. If temperature is ever less than or equal to 25, it logs It's a cool day!.
+
+    So, which should you use between an if statement and a ternary? Use a ternary while dealing with a single condition or single expressions, or when you want a compact syntax for simple logic. Use if/else statements when you're dealing with complex conditions and multiple statements, as things become unreadable if you nest ternaries. 
+
+What Are Binary Logical Operators, and How Do They Work?
+    Binary logical operators help you evaluate two expressions and return a result based on their truthiness. Let's look at the three most common binary logical operators: logical AND, logical OR, and the nullish coalescing operator.
+
+    The logical AND operator is represented by a double ampersand (&&). It checks if both operands are true and returns a result. If both operands are truthy, it returns the second value, that is, the one on the right:
+
+    const result = true && 'hello';
+
+    console.log(result); // hello
+    In the example above, the text hello is logged to the console because both operands are true. If either operand is falsy, it returns the falsy value:
+
+    const result = 0 && 3;
+
+    console.log(result); // 0
+    Since 0 is a falsy value, the number 0 is logged to the console. And if both operands are falsy, it returns the first falsy value:
+
+    const result = false && 0;
+
+    console.log(result); // false
+    Since false is a falsy value, then false is logged to the console. The logical AND operator is useful when you want to check multiple conditions and ensure that all are true before proceeding. Here is an example:
+
+    if (2 < 3 && 3 < 4) {
+    console.log('The if block runs'); 
+    } else {
+    console.log('The else block runs');
+    } 
+    In the condition, since 2 is less than 3 AND 3 is less than 4, then the sentence The if block runs will be logged to the console.
+
+    The logical OR operator checks if at least one of the operands is truthy. If the first operand is truthy, it returns that value:
+
+    const result = 'This is truthy' || false;
+
+    console.log(result); // This is truthy
+    If the first operand is falsy but the second is truthy, the second value will be logged to the console:
+
+    const result = 0 || 'This is truthy';
+
+    console.log(result); // This is truthy
+    It is common to use the logical OR operator in if/else statements like this:
+
+    let userInput;
+
+    if (userInput || 'Guest') {
+    console.log('A user is present');
+    } else {
+    console.log('No user detected');
+    }
+    Since we didn't assign a value to the userInput variable, it is currently undefined. The condition in the if statement checks if either the userInput variable or the string Guest are truthy. Since the string Guest is true in a boolean context like this, the string A user is present will be logged to the console.
+
+    The nullish coalescing operator is more sophisticated than logical OR and logical AND. Represented by a double question mark (??), it helps in scenarios where you want to return a value only if the first one is null or undefined. Here is an example of working with the nullish coalescing operator:
+
+    const result = null ?? 'default';
+
+    console.log(result); // default
+    Since null is a nullish value, the string default would be logged to the console. The nullish coalescing operator is incredibly useful in situations where null or undefined are the only values that should trigger a fallback or default value. Here is an example of dealing with a user's preference settings:
+
+    const userSettings = {
+    theme: null,
+    volume: 0,
+    notifications: false,
+    };
+
+    let theme = userSettings.theme ?? 'light';
+    console.log(theme); // light
+    In the example above, we have an object called userSettings that contains theme, volume and notifications properties. We are accessing the theme using dot notation like userSettings.theme. You will learn more about how to work with objects in a future lesson. Since the user's theme is currently set to null, then the string light will be logged to the console.
+
+
+What Is the Math Object in JavaScript, and What Are Some Common Methods?
+    When diving into JavaScript, you'll quickly discover that performing mathematical operations is a common task. While basic arithmetic operators can handle simple calculations, JavaScript offers a built-in Math object to tackle more complex math challenges.
+
+    This handy tool provides a variety of methods that make it easier to perform advanced calculations and manipulate numbers. Let's explore these methods and see how they can simplify your coding experience.
+
+    The Math.random() method generates a random floating-point number between 0 (inclusive) and 1 (exclusive). This means the possible output can be 0, but it will never actually reach 1. Here is an example working with the Math.random() method:
+
+    const randomNum = Math.random();
+
+    console.log(randomNum);
+    // any number between 0 and 1 – 0 inclusive and 1 exclusive
+    Math.min() and Math.max() both take a set of numbers and return the minimum and maximum value, respectively. Here is an example of working both of those methods:
+
+    const smallest = Math.min(1, 5, 3, 9);
+    console.log(smallest); // 1
+
+    const largest = Math.max(1, 5, 3, 9);
+    console.log(largest); // 9
+    The first console.log() will log the number 1, since 1 is the smallest in that list of numbers. And the second console.log() will log the number 9, since 9 is the largest numbers in that list.
+
+    If you wanted to round numbers up or down to the nearest whole integer, you could use the Math.ceil() and Math.floor() methods. Here is an example of working with Math.ceil():
+
+    console.log(Math.ceil(4.3)); // 5
+    Math.ceil() will round 4.3 up to the nearest whole integer, which is 5 in this case. Now, let's take a look at rounding a number down:
+
+    console.log(Math.floor(4.7)); // 4
+    Math.floor() will round 4.7 down to the nearest whole integer, which is 4 in this case. Math.round() is the hybrid of Math.ceil() and Math.floor(). It rounds a number to its nearest integer, taking the decimal point into account:
+
+    console.log(Math.round(2.3)); // 2
+    console.log(Math.round(4.5)); // 5
+    console.log(Math.round(4.8)); // 5
+    So, if the decimal point is less than 5, the number is rounded down. And if the decimal point is 5 or greater, the number is rounded up. A practical application of Math.floor() and Math.random() is to generate a random number between two whole numbers. Here's the syntax for that:
+
+    const max = 10;
+    const min = 5;
+    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(randomNum);
+    Generating a random number between 20 and 1 would look like this:
+
+    const randomNumBtw1And20 = Math.floor(Math.random() * 20) + 1;
+    console.log(randomNumBtw1And20);
+    Another helpful Math method would be the Math.trunc() method. Math.trunc() removes the decimal part of a number, returning only the integer portion, without rounding:
+
+    console.log(Math.trunc(2.9)); // 2
+    console.log(Math.trunc(9.1)); // 9
+    If you need to get the square root or cube root of a number, you can use the Math.sqrt() and Math.cbrt() methods, respectively:
+
+    console.log(Math.sqrt(81)); // 9
+    console.log(Math.cbrt(27)); // 3
+    The first log statement, will log 9 because the square root of 81 is 9, while the second log statement will log 3 because the cube root of 27 is 3. If you need to get the absolute value of a number, you can use the Math.abs() method:
+
+    console.log(Math.abs(-5)); // 5
+    console.log(Math.abs(5)); // 5
+    Math.abs() returns the absolute value of a number, turning negatives into positives. The last method we will look at will be the Math.pow() method:
+
+    console.log(Math.pow(2, 3)); // 8
+    console.log(Math.pow(8, 2)); // 64
+    Math.pow() takes two numbers and raise the first to the power of the second. There are many more methods that belong to the Math object, that you can explore on your own. However, these are just a few of the more commonly used ones found in JavaScript codebases.
+
