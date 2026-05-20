@@ -1,0 +1,7 @@
+Task 1 : Build a boolean check function
+Task 2 : Build an email masker
+Task 3 : Build a loan qualification checker
+Task 4 : Build a temperature converter
+Task 5 : Build a leap year calculator
+Task 6 : Implement a simple truncate algorithm
+Task 7 : Build a Confirm ending tool
